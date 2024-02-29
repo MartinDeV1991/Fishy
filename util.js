@@ -1,27 +1,38 @@
 let pause = false;
 const backgroundButton1 = {
-    x: 300,
-    y: 10,
-    width: 100,
-    height: 50
+    xOriginal: 300,
+    yOriginal: 10,
+    widthOriginal: 100,
+    heightOriginal: 50,
 }
 const backgroundButton2 = {
-    x: 410,
-    y: 10,
-    width: 100,
-    height: 50
+    xOriginal: 410,
+    yOriginal: 10,
+    widthOriginal: 100,
+    heightOriginal: 50,
 }
 const backgroundButton3 = {
-    x: 520,
-    y: 10,
-    width: 100,
-    height: 50
+    xOriginal: 520,
+    yOriginal: 10,
+    widthOriginal: 100,
+    heightOriginal: 50,
 }
 const restartButton = {
-    x: 720,
-    y: 10,
-    width: 100,
-    height: 50
+    xOriginal: 720,
+    yOriginal: 10,
+    widthOriginal: 100,
+    heightOriginal: 50,
+}
+
+const buttons = [backgroundButton1, backgroundButton2, backgroundButton3, restartButton]
+
+function resizeButtons() {
+    buttons.forEach((button => {
+        button.x = button.xOriginal * ratio;
+        button.y = button.yOriginal * ratio;
+        button.width = button.widthOriginal * ratio;
+        button.height = button.heightOriginal * ratio;
+    }))
 }
 
 function handleGameStatus() {
@@ -38,11 +49,11 @@ function handleGameStatus() {
     ctx.strokeRect(restartButton.x, restartButton.y, restartButton.width, restartButton.height);
 
     ctx.fillStyle = 'rgba(4,41,117,1';
-    ctx.font = '16px Orbitron';
-    ctx.fillText('background1', backgroundButton1.x + 8, backgroundButton1.y + 33);
-    ctx.fillText('background2', backgroundButton2.x + 8, backgroundButton2.y + 33);
-    ctx.fillText('background3', backgroundButton3.x + 8, backgroundButton3.y + 33);
-    ctx.fillText('restart', restartButton.x + 30, restartButton.y + 30);
+    ctx.font = miniFont + 'px Arial';
+    ctx.fillText('background1', backgroundButton1.x + 8 * ratio, backgroundButton1.y + 33 * ratio);
+    ctx.fillText('background2', backgroundButton2.x + 8 * ratio, backgroundButton2.y + 33 * ratio);
+    ctx.fillText('background3', backgroundButton3.x + 8 * ratio, backgroundButton3.y + 33 * ratio);
+    ctx.fillText('restart', restartButton.x + 30 * ratio, restartButton.y + 30 * ratio);
 
     if (squareCollision(mouse, backgroundButton1) && mouse.clicked) {
         background.src = './img/background1.jpg';
@@ -69,17 +80,17 @@ function restart() {
 }
 
 function drawScore() {
-    ctx.font = '50px Arial';
+    ctx.font = mediumFont + 'px Arial';
     ctx.fillStyle = 'black';
-    ctx.fillText('Score: ' + score, 50, 75);
+    ctx.fillText('Score: ' + score, 50 * ratio, 75 * ratio);
     ctx.fillStyle = 'white';
-    ctx.fillText('Score: ' + score, 55, 80);
+    ctx.fillText('Score: ' + score, 55 * ratio, 80 * ratio);
 }
 
 function drawGameOver() {
-    ctx.font = '50px impact'
+    ctx.font = mediumFont + 'px Arial';
     ctx.fillStyle = 'black'
-    ctx.fillText('GAME OVER, your score is ' + score, canvas.width / 2, canvas.height / 2)
+    ctx.fillText('GAME OVER, your score is ' + score, canvas.width / 4, canvas.height / 2)
     ctx.fillStyle = 'white'
-    ctx.fillText('GAME OVER, your score is ' + score, canvas.width / 2 + 5, canvas.height / 2 + 5)
+    ctx.fillText('GAME OVER, your score is ' + score, canvas.width / 4 + 5, canvas.height / 2 + 5)
 }
