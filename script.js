@@ -138,6 +138,7 @@ canvas.addEventListener('mouseup', function () {
 
 canvas.addEventListener('touchstart', function () {
     mouse.clicked = true;
+    pause = false;
 })
 canvas.addEventListener('touchmove', updateTouchPosition);
 
